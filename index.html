@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0043)file:///C:/Users/jay85/Downloads/index.html -->
+<!-- saved from url=(0045)file:///C:/Users/jay85/Downloads/index_1.html -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -2544,21 +2544,65 @@ function toggleMenu() {
 function submitForm() {
   var fname = document.getElementById('fname').value.trim();
   var email = document.getElementById('email').value.trim();
+  var phone = document.getElementById('phone').value.trim();
+  var loantype = document.getElementById('loantype').value;
+  var amount = document.getElementById('amount').value.trim();
+  var location = document.getElementById('location').value.trim();
+  var proptype = document.getElementById('proptype').value.trim();
+  var message = document.getElementById('message').value.trim();
+  var lname = document.getElementById('lname').value.trim();
+  var role = document.getElementById('role').value;
+
   if (!fname || !email) {
     alert('Please fill in at least your name and email address.');
     return;
   }
-  document.getElementById('formToast').classList.add('visible');
-  document.getElementById('fname').value = '';
-  document.getElementById('lname').value = '';
-  document.getElementById('email').value = '';
-  document.getElementById('phone').value = '';
-  document.getElementById('amount').value = '';
-  document.getElementById('location').value = '';
-  document.getElementById('proptype').value = '';
-  document.getElementById('message').value = '';
-  document.getElementById('loantype').selectedIndex = 0;
-  document.getElementById('role').selectedIndex = 0;
+
+  var btn = document.querySelector('.form-submit');
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+
+  fetch('https://formspree.io/f/meeyjbyb', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify({
+      name: fname + ' ' + lname,
+      email: email,
+      phone: phone,
+      role: role,
+      loan_type: loantype,
+      loan_amount: amount,
+      property_location: location,
+      property_type: proptype,
+      project_summary: message
+    })
+  })
+  .then(function(response) {
+    if (response.ok) {
+      document.getElementById('formToast').classList.add('visible');
+      document.getElementById('fname').value = '';
+      document.getElementById('lname').value = '';
+      document.getElementById('email').value = '';
+      document.getElementById('phone').value = '';
+      document.getElementById('amount').value = '';
+      document.getElementById('location').value = '';
+      document.getElementById('proptype').value = '';
+      document.getElementById('message').value = '';
+      document.getElementById('loantype').selectedIndex = 0;
+      document.getElementById('role').selectedIndex = 0;
+      btn.textContent = 'Submit Loan Inquiry';
+      btn.disabled = false;
+    } else {
+      alert('There was an issue sending your message. Please email us directly at info@ajgulfblvdcapital.com');
+      btn.textContent = 'Submit Loan Inquiry';
+      btn.disabled = false;
+    }
+  })
+  .catch(function() {
+    alert('There was an issue sending your message. Please email us directly at info@ajgulfblvdcapital.com');
+    btn.textContent = 'Submit Loan Inquiry';
+    btn.disabled = false;
+  });
 }
 </script>
 <!-- AI CHAT WIDGET -->

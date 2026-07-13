@@ -2562,50 +2562,40 @@ function submitForm() {
   btn.textContent = 'Sending...';
   btn.disabled = true;
 
-  fetch('https://formspree.io/f/meeyjbyb', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-    body: JSON.stringify({
-      name: fname + ' ' + lname,
-      email: email,
-      phone: phone,
-      role: role,
-      loan_type: loantype,
-      loan_amount: amount,
-      property_location: location,
-      property_type: proptype,
-      project_summary: message
-    })
-  })
-  .then(function(response) {
-    if (response.ok) {
-      document.getElementById('formToast').classList.add('visible');
-      document.getElementById('fname').value = '';
-      document.getElementById('lname').value = '';
-      document.getElementById('email').value = '';
-      document.getElementById('phone').value = '';
-      document.getElementById('amount').value = '';
-      document.getElementById('location').value = '';
-      document.getElementById('proptype').value = '';
-      document.getElementById('message').value = '';
-      document.getElementById('loantype').selectedIndex = 0;
-      document.getElementById('role').selectedIndex = 0;
-      btn.textContent = 'Submit Loan Inquiry';
-      btn.disabled = false;
-    } else {
-      alert('There was an issue sending your message. Please email us directly at info@ajgulfblvdcapital.com');
-      btn.textContent = 'Submit Loan Inquiry';
-      btn.disabled = false;
-    }
-  })
-  .catch(function() {
+  emailjs.send('service_1lc7pkk', 'template_tc7lagq', {
+    name: fname + ' ' + lname,
+    email: email,
+    phone: phone,
+    role: role,
+    loan_type: loantype,
+    amount: amount,
+    location: location,
+    proptype: proptype,
+    message: message
+  }).then(function() {
+    document.getElementById('formToast').classList.add('visible');
+    document.getElementById('fname').value = '';
+    document.getElementById('lname').value = '';
+    document.getElementById('email').value = '';
+    document.getElementById('phone').value = '';
+    document.getElementById('amount').value = '';
+    document.getElementById('location').value = '';
+    document.getElementById('proptype').value = '';
+    document.getElementById('message').value = '';
+    document.getElementById('loantype').selectedIndex = 0;
+    document.getElementById('role').selectedIndex = 0;
+    btn.textContent = 'Submit Loan Inquiry';
+    btn.disabled = false;
+  }, function(error) {
     alert('There was an issue sending your message. Please email us directly at info@ajgulfblvdcapital.com');
     btn.textContent = 'Submit Loan Inquiry';
     btn.disabled = false;
   });
 }
 </script>
-<!-- AI CHAT WIDGET -->
+<!-- EmailJS -->
+<script src="./index_files/email.min.js.download"></script>
+<script>emailjs.init('qSeEm3z4KQKAutPB4');</script>
 <style>
   .chat-bubble {
     position: fixed;

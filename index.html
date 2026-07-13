@@ -1113,14 +1113,7 @@
   }
   .print-btn:hover { background: var(--navy-light); }
 
-  @media print {
-    nav, .mobile-menu, .form-tabs, .print-btn, footer, .hero, .chat-bubble, .chat-window { display: none !important; }
-    body * { visibility: hidden; }
-    .printable-form, .printable-form * { visibility: visible !important; }
-    .printable-form { position: fixed; left: 0; top: 0; width: 100%; background: white; padding: 2rem; }
-    .form-panel { display: block !important; }
-    .page { display: block !important; padding-top: 0 !important; }
-  }
+  /* END LOAN PACKAGE FORMS */
 
   /* SUCCESS TOAST */
   .toast {
@@ -2533,7 +2526,60 @@ function showForm(id) {
   event.target.classList.add('active');
 }
 function printForm() {
-  window.print();
+  var activePanel = document.querySelector('.form-panel.active');
+  var form = activePanel ? activePanel.querySelector('.printable-form') : null;
+  if (!form) return;
+
+  // Create hidden iframe - most reliable cross-browser method
+  var iframe = document.createElement('iframe');
+  iframe.style.position = 'fixed';
+  iframe.style.right = '0';
+  iframe.style.bottom = '0';
+  iframe.style.width = '0';
+  iframe.style.height = '0';
+  iframe.style.border = '0';
+  document.body.appendChild(iframe);
+
+  var doc = iframe.contentWindow.document;
+  doc.open();
+  doc.write('<!DOCTYPE html><html><head><title>A&J Gulf Blvd Capital — Loan Package</title>');
+  doc.write('<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">');
+  doc.write('<style>');
+  doc.write('*{box-sizing:border-box;margin:0;padding:0;}');
+  doc.write('body{font-family:Inter,sans-serif;font-size:13px;color:#0D1B2A;padding:1.5rem;}');
+  doc.write('.pf-header{text-align:center;border-bottom:2px solid #0B1E3F;padding-bottom:1rem;margin-bottom:1.5rem;}');
+  doc.write('.pf-header h2{font-family:"Playfair Display",serif;font-size:20px;color:#0B1E3F;font-weight:700;margin-bottom:4px;}');
+  doc.write('.pf-header p{font-size:11px;color:#6B7D96;text-transform:uppercase;letter-spacing:0.04em;}');
+  doc.write('.pf-section{margin-bottom:1.5rem;}');
+  doc.write('.pf-section-title{background:#0B1E3F;color:#fff;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:5px 10px;border-radius:3px;margin-bottom:0.75rem;}');
+  doc.write('.pf-field-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}');
+  doc.write('.pf-field{display:flex;flex-direction:column;gap:3px;}');
+  doc.write('.pf-field.full{grid-column:1/-1;}');
+  doc.write('.pf-field label{font-size:9px;font-weight:700;color:#0D1B2A;letter-spacing:0.06em;text-transform:uppercase;}');
+  doc.write('.pf-field input,.pf-field select,.pf-field textarea{border:none;border-bottom:1px solid #333;padding:3px 2px;font-size:12px;width:100%;background:transparent;font-family:Inter,sans-serif;}');
+  doc.write('.pf-field textarea{min-height:40px;}');
+  doc.write('.pf-checkbox-row{display:flex;gap:1rem;flex-wrap:wrap;margin-top:3px;}');
+  doc.write('.pf-checkbox-row label{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:400;text-transform:none;letter-spacing:0;color:#3D4F66;cursor:pointer;}');
+  doc.write('.pf-sig-row{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:1rem;}');
+  doc.write('.pf-sig{display:flex;flex-direction:column;gap:3px;}');
+  doc.write('.pf-sig-line{border-bottom:1px solid #333;height:32px;}');
+  doc.write('.pf-sig span{font-size:9px;color:#6B7D96;text-transform:uppercase;letter-spacing:0.06em;}');
+  doc.write('table{width:100%;border-collapse:collapse;font-size:11px;margin-top:0.5rem;}');
+  doc.write('thead th{background:#0B1E3F;color:#fff;padding:6px 8px;text-align:left;font-size:10px;font-weight:600;}');
+  doc.write('tbody td{border:1px solid #DDE3ED;padding:5px 8px;color:#3D4F66;}');
+  doc.write('tbody td input{border:none;background:transparent;font-size:11px;width:100%;font-family:Inter,sans-serif;}');
+  doc.write('.print-btn{display:none!important;}');
+  doc.write('.pf-two-col{display:grid;grid-template-columns:1fr 1fr;gap:2rem;}');
+  doc.write('</style></head><body>');
+  doc.write(form.innerHTML);
+  doc.write('</body></html>');
+  doc.close();
+
+  iframe.contentWindow.onload = function() {
+    iframe.contentWindow.focus();
+    iframe.contentWindow.print();
+    setTimeout(function() { document.body.removeChild(iframe); }, 1000);
+  };
 }
 function showPage(id) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));

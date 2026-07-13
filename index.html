@@ -2019,29 +2019,26 @@
         <div>
           <div style="border:1px solid var(--border);border-radius:var(--radius-lg);padding:2.5rem;">
             <h3 style="font-family:&#39;Playfair Display&#39;,serif;font-size:22px;color:var(--text-dark);margin-bottom:1.75rem;font-weight:700;">Loan Inquiry Form</h3>
-            <form name="loan-inquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="file:///C:/success.html">
-              <input type="hidden" name="form-name" value="loan-inquiry">
-              <p style="display:none;"><input name="bot-field"></p>
-              <div class="form-grid">
+            <div class="form-grid" id="inquiryForm">
                 <div class="form-group">
                   <label for="fname">First Name</label>
-                  <input type="text" id="fname" name="first_name" placeholder="John">
+                  <input type="text" id="fname" placeholder="John">
                 </div>
                 <div class="form-group">
                   <label for="lname">Last Name</label>
-                  <input type="text" id="lname" name="last_name" placeholder="Smith">
+                  <input type="text" id="lname" placeholder="Smith">
                 </div>
                 <div class="form-group">
                   <label for="email">Email Address</label>
-                  <input type="email" id="email" name="email" placeholder="john@company.com" required="">
+                  <input type="email" id="email" placeholder="john@company.com">
                 </div>
                 <div class="form-group">
                   <label for="phone">Phone Number</label>
-                  <input type="tel" id="phone" name="phone" placeholder="+1 (000) 000-0000">
+                  <input type="tel" id="phone" placeholder="+1 (000) 000-0000">
                 </div>
                 <div class="form-group full">
                   <label for="loantype">Loan Program</label>
-                  <select id="loantype" name="loan_program">
+                  <select id="loantype">
                     <option value="">Select a loan program…</option>
                     <option>Commercial Acquisition</option>
                     <option>Construction Loan</option>
@@ -2057,23 +2054,23 @@
                 </div>
                 <div class="form-group">
                   <label for="amount">Loan Amount Requested</label>
-                  <input type="text" id="amount" name="loan_amount" placeholder="e.g. $2,500,000">
+                  <input type="text" id="amount" placeholder="e.g. $2,500,000">
                 </div>
                 <div class="form-group">
                   <label for="location">Property Location</label>
-                  <input type="text" id="location" name="property_location" placeholder="City, State">
+                  <input type="text" id="location" placeholder="City, State">
                 </div>
                 <div class="form-group full">
                   <label for="proptype">Property Type</label>
-                  <input type="text" id="proptype" name="property_type" placeholder="e.g. Multifamily, Marina, Golf Course…">
+                  <input type="text" id="proptype" placeholder="e.g. Multifamily, Marina, Golf Course…">
                 </div>
                 <div class="form-group full">
                   <label for="message">Project Summary</label>
-                  <textarea id="message" name="project_summary" placeholder="Brief overview of the project, current status, use of proceeds, and timeline…"></textarea>
+                  <textarea id="message" placeholder="Brief overview of the project, current status, use of proceeds, and timeline…"></textarea>
                 </div>
                 <div class="form-group full">
                   <label for="role">I am a…</label>
-                  <select id="role" name="role">
+                  <select id="role">
                     <option value="">Select…</option>
                     <option>Direct Borrower / Developer</option>
                     <option>Mortgage Broker / Capital Advisor</option>
@@ -2082,8 +2079,7 @@
                   </select>
                 </div>
               </div>
-              <button type="submit" class="btn-primary form-submit" style="margin-top:1.5rem;">Submit Loan Inquiry</button>
-            </form>
+              <button onclick="submitForm()" class="btn-primary form-submit" style="margin-top:1.5rem;">Submit Loan Inquiry</button>
             <div class="toast" id="formToast">✓ Your inquiry has been submitted. Our team will be in touch shortly.</div>
           </div>
         </div>
@@ -2568,32 +2564,42 @@ function submitForm() {
   btn.textContent = 'Sending...';
   btn.disabled = true;
 
-  emailjs.send('service_1lc7pkk', 'template_tc7lagq', {
-    name: fname + ' ' + lname,
-    email: email,
-    phone: phone,
-    role: role,
-    loan_type: loantype,
-    amount: amount,
-    location: location,
-    proptype: proptype,
-    message: message
-  }).then(function() {
-    document.getElementById('formToast').classList.add('visible');
-    document.getElementById('fname').value = '';
-    document.getElementById('lname').value = '';
-    document.getElementById('email').value = '';
-    document.getElementById('phone').value = '';
-    document.getElementById('amount').value = '';
-    document.getElementById('location').value = '';
-    document.getElementById('proptype').value = '';
-    document.getElementById('message').value = '';
-    document.getElementById('loantype').selectedIndex = 0;
-    document.getElementById('role').selectedIndex = 0;
-    btn.textContent = 'Submit Loan Inquiry';
-    btn.disabled = false;
-  }, function(error) {
-    alert('There was an issue sending your message. Please email us directly at info@ajgulfblvdcapital.com');
+  fetch('https://formspree.io/f/meeyjbyb', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify({
+      name: fname + ' ' + lname,
+      email: email,
+      phone: phone,
+      role: role,
+      loan_type: loantype,
+      loan_amount: amount,
+      property_location: location,
+      property_type: proptype,
+      project_summary: message
+    })
+  }).then(function(response) {
+    if (response.ok) {
+      document.getElementById('formToast').classList.add('visible');
+      document.getElementById('fname').value = '';
+      document.getElementById('lname').value = '';
+      document.getElementById('email').value = '';
+      document.getElementById('phone').value = '';
+      document.getElementById('amount').value = '';
+      document.getElementById('location').value = '';
+      document.getElementById('proptype').value = '';
+      document.getElementById('message').value = '';
+      document.getElementById('loantype').selectedIndex = 0;
+      document.getElementById('role').selectedIndex = 0;
+      btn.textContent = 'Submit Loan Inquiry';
+      btn.disabled = false;
+    } else {
+      alert('There was an issue. Please email info@ajgulfblvdcapital.com directly.');
+      btn.textContent = 'Submit Loan Inquiry';
+      btn.disabled = false;
+    }
+  }).catch(function() {
+    alert('There was an issue. Please email info@ajgulfblvdcapital.com directly.');
     btn.textContent = 'Submit Loan Inquiry';
     btn.disabled = false;
   });

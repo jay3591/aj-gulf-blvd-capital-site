@@ -1989,6 +1989,110 @@
     </div>
   </div>
 
+  <!-- DOCUMENT UPLOAD SECTION -->
+  <div class="section" style="background:#F8F9FC;">
+    <div class="container" style="max-width:800px;">
+      <div class="section-eyebrow" style="text-align:center;">Submit Your Package Online</div>
+      <h2 class="section-title">Upload Your Documents</h2>
+      <p class="section-intro">Completed your loan package? Upload your documents securely below and our team will review and be in touch within 24 hours.</p>
+
+      <div style="background:#fff;border:1px solid #DDE3ED;border-radius:12px;padding:2.5rem;margin-top:2rem;">
+        <form name="document-upload" method="POST" data-netlify="true" enctype="multipart/form-data" action="file:///C:/success.html">
+          <input type="hidden" name="form-name" value="document-upload">
+          
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="upload-fname">First Name</label>
+              <input type="text" id="upload-fname" name="first_name" placeholder="John" required="">
+            </div>
+            <div class="form-group">
+              <label for="upload-lname">Last Name</label>
+              <input type="text" id="upload-lname" name="last_name" placeholder="Smith" required="">
+            </div>
+            <div class="form-group">
+              <label for="upload-email">Email Address</label>
+              <input type="email" id="upload-email" name="email" placeholder="john@company.com" required="">
+            </div>
+            <div class="form-group">
+              <label for="upload-phone">Phone Number</label>
+              <input type="tel" id="upload-phone" name="phone" placeholder="+1 (000) 000-0000">
+            </div>
+            <div class="form-group full">
+              <label for="upload-loantype">Loan Program</label>
+              <select id="upload-loantype" name="loan_program">
+                <option value="">Select a loan program…</option>
+                <option>Commercial Acquisition</option>
+                <option>Construction Loan</option>
+                <option>Bridge Loan</option>
+                <option>Land Development</option>
+                <option>Value-Add Commercial</option>
+                <option>Multifamily Bridge</option>
+                <option>Golf Course / Country Club</option>
+                <option>Marina / Resort</option>
+                <option>Specialty Asset</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group full">
+              <label for="upload-amount">Loan Amount Requested</label>
+              <input type="text" id="upload-amount" name="loan_amount" placeholder="e.g. $2,500,000">
+            </div>
+          </div>
+
+          <div style="margin-top:1.5rem;">
+            <label style="font-size:13px;font-weight:600;color:#0D1B2A;letter-spacing:0.04em;text-transform:uppercase;display:block;margin-bottom:0.75rem;">Upload Documents</label>
+            <p style="font-size:13px;color:#6B7D96;margin-bottom:1rem;">You can upload multiple files. Accepted formats: PDF, JPG, PNG, DOC, DOCX, XLS, XLSX. Max 8MB per file.</p>
+            
+            <div style="display:flex;flex-direction:column;gap:0.75rem;">
+              <div style="display:flex;align-items:center;gap:1rem;background:#F8F9FC;border:1px solid #DDE3ED;border-radius:6px;padding:0.75rem 1rem;">
+                <span style="font-size:13px;color:#0B1E3F;font-weight:600;min-width:200px;">Commercial Loan Application</span>
+                <input type="file" name="commercial_loan_app" accept=".pdf,.doc,.docx,.jpg,.png" style="font-size:13px;">
+              </div>
+              <div style="display:flex;align-items:center;gap:1rem;background:#F8F9FC;border:1px solid #DDE3ED;border-radius:6px;padding:0.75rem 1rem;">
+                <span style="font-size:13px;color:#0B1E3F;font-weight:600;min-width:200px;">Personal Financial Statement</span>
+                <input type="file" name="personal_financial_statement" accept=".pdf,.doc,.docx,.jpg,.png" style="font-size:13px;">
+              </div>
+              <div style="display:flex;align-items:center;gap:1rem;background:#F8F9FC;border:1px solid #DDE3ED;border-radius:6px;padding:0.75rem 1rem;">
+                <span style="font-size:13px;color:#0B1E3F;font-weight:600;min-width:200px;">Track Record</span>
+                <input type="file" name="track_record" accept=".pdf,.doc,.docx,.jpg,.png" style="font-size:13px;">
+              </div>
+              <div style="display:flex;align-items:center;gap:1rem;background:#F8F9FC;border:1px solid #DDE3ED;border-radius:6px;padding:0.75rem 1rem;">
+                <span style="font-size:13px;color:#0B1E3F;font-weight:600;min-width:200px;">Scope of Work / Draw Schedule</span>
+                <input type="file" name="scope_of_work" accept=".pdf,.doc,.docx,.jpg,.png" style="font-size:13px;">
+              </div>
+              <div style="display:flex;align-items:center;gap:1rem;background:#F8F9FC;border:1px solid #DDE3ED;border-radius:6px;padding:0.75rem 1rem;">
+                <span style="font-size:13px;color:#0B1E3F;font-weight:600;min-width:200px;">Tax Returns</span>
+                <input type="file" name="tax_returns" accept=".pdf,.doc,.docx,.jpg,.png" style="font-size:13px;">
+              </div>
+              <div style="display:flex;align-items:center;gap:1rem;background:#F8F9FC;border:1px solid #DDE3ED;border-radius:6px;padding:0.75rem 1rem;">
+                <span style="font-size:13px;color:#0B1E3F;font-weight:600;min-width:200px;">Bank Statements</span>
+                <input type="file" name="bank_statements" accept=".pdf,.doc,.docx,.jpg,.png" style="font-size:13px;">
+              </div>
+              <div style="display:flex;align-items:center;gap:1rem;background:#F8F9FC;border:1px solid #DDE3ED;border-radius:6px;padding:0.75rem 1rem;">
+                <span style="font-size:13px;color:#0B1E3F;font-weight:600;min-width:200px;">Property Photos / Appraisal</span>
+                <input type="file" name="property_photos" accept=".pdf,.doc,.docx,.jpg,.png" style="font-size:13px;">
+              </div>
+              <div style="display:flex;align-items:center;gap:1rem;background:#F8F9FC;border:1px solid #DDE3ED;border-radius:6px;padding:0.75rem 1rem;">
+                <span style="font-size:13px;color:#0B1E3F;font-weight:600;min-width:200px;">Other Documents</span>
+                <input type="file" name="other_documents" accept=".pdf,.doc,.docx,.jpg,.png" style="font-size:13px;">
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-primary" style="margin-top:2rem;width:100%;padding:16px;">Submit Loan Package</button>
+        </form>
+      </div>
+
+      <div style="background:#0B1E3F;border-radius:8px;padding:1.5rem;margin-top:1.5rem;display:flex;gap:1rem;align-items:center;">
+        <span style="font-size:2rem;">🔒</span>
+        <div>
+          <h4 style="color:#C8A84B;margin-bottom:0.25rem;font-size:14px;">Secure Document Submission</h4>
+          <p style="color:rgba(255,255,255,0.75);font-size:13px;line-height:1.6;">All documents are transmitted securely and reviewed only by authorized A&amp;J Gulf Blvd Capital team members. Your information is kept strictly confidential.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <!-- ===================== CONTACT ===================== -->
@@ -2485,7 +2589,7 @@
     <div class="hero-inner">
       <div class="hero-eyebrow">Borrower Resources</div>
       <h1>Loan Application <em>Package</em></h1>
-      <p class="hero-sub">Download, fill out, and print the forms below. Submit your completed package to our team to get started.</p>
+      <p class="hero-sub">Download, fill out, and print the forms below. Then submit your completed package securely online using the upload section at the bottom of this page.</p>
     </div>
   </div>
 

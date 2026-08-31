@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /success.html
+Disallow: /Thank%20You%20%E2%80%94%20A%26J%20Gulf%20Blvd%20Capital.html
+
+Sitemap: https://ajgulfblvdcapital.com/sitemap.xml

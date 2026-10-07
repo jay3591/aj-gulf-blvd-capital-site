@@ -404,6 +404,18 @@
     color: var(--text-muted);
     line-height: 1.6;
   }
+  .advantage-card-dd {
+    grid-column: span 2;
+  }
+  .advantage-card-dd p {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-dark);
+    line-height: 1.55;
+  }
+  @media (max-width: 1180px) {
+    .advantage-card-dd { grid-column: 1 / -1; }
+  }
 
   /* LOAN TABLE */
   .table-wrap { overflow-x: auto; margin-top: 2rem; }
@@ -1310,6 +1322,11 @@
           <div class="advantage-icon">🤝</div>
           <h3>Broker Friendly</h3>
           <p>We protect and compensate broker relationships on every transaction. Your fee is locked in upfront.</p>
+        </div>
+        <div class="advantage-card advantage-card-dd">
+          <div class="advantage-icon">📋</div>
+          <h3>Third-Party Due Diligence</h3>
+          <p>A&amp;J Gulf Blvd Capital does not charge upfront application, processing, underwriting, or origination fees. Those fees are collected at closing from loan proceeds. However, as is customary in commercial lending, borrowers are responsible for the cost of required independent third-party due diligence, which may include appraisals, Phase I or Phase II environmental reports, property condition assessments, inspections, engineering reports, surveys, or construction reviews. These third-party costs must be paid before the applicable report is ordered and are the borrower’s responsibility regardless of whether the loan ultimately closes. We encourage borrowers to consider this requirement before beginning the underwriting process so that time and resources are not unnecessarily expended by either party.</p>
         </div>
       </div>
     </div>

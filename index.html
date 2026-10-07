@@ -1237,6 +1237,24 @@
     .step-num { width: 48px; height: 48px; font-size: 18px; }
     .process-step:not(:last-child)::after { left: 24px; top: 52px; }
   }
+
+  /* NAV - single-line, title-case menu */
+  .nav-inner { max-width: 1440px; padding: 0 1.5rem; }
+  .nav-logo { flex-shrink: 0; }
+  .nav-logo-text strong, .nav-logo-text span { white-space: nowrap; }
+  nav .nav-links { gap: 0.85rem; flex-wrap: nowrap; margin-left: 1.25rem; }
+  nav .nav-links a {
+    white-space: nowrap;
+    text-transform: none;
+    font-size: 12.5px;
+    letter-spacing: 0.01em;
+    line-height: 1;
+  }
+  nav .nav-cta { padding: 10px 18px; }
+  @media (max-width: 1345px) {
+    nav .nav-links { display: none; }
+    nav .hamburger { display: flex; }
+  }
 </style>
 </head>
 <body>

@@ -1251,7 +1251,18 @@
     line-height: 1;
   }
   nav .nav-cta { padding: 10px 18px; }
-  @media (max-width: 1345px) {
+  /* NAV - two-row header (logo row + section links row) */
+  @media (min-width: 1256px) {
+    .nav-inner { height: auto; flex-wrap: wrap; justify-content: center; padding-top: 10px; }
+    .nav-logo { flex-basis: 100%; justify-content: center; height: 52px; }
+    nav .nav-links {
+      flex-basis: 100%; justify-content: center; margin: 8px 0 0; padding: 0;
+      height: 46px; gap: 1rem; border-top: 1px solid rgba(200,168,75,0.2);
+    }
+    nav .nav-links a { font-size: 12.5px; }
+    .page { padding-top: 117px; }
+  }
+  @media (max-width: 1255px) {
     nav .nav-links { display: none; }
     nav .hamburger { display: flex; }
   }
